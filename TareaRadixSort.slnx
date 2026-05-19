@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="TareaRadixSort.vcxproj" />
+  <Project Path="TareaRadixSort.vcxproj" Id="915f253c-593d-4b45-8872-97a0e13f97aa" />
 </Solution>
