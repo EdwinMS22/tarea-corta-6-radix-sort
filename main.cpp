@@ -31,6 +31,12 @@ static int randomBig() {
     return (std::rand() << 15) | std::rand();
 }
 
+static void radixSort(const LinkedList<int>& list, int base) {
+    LinkedList<int>* buckets = new LinkedList<int>[base];
+
+    buckets->print();
+}
+
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
@@ -44,7 +50,7 @@ int main() {
         for (int i = 0; i < size; i++)
             numbers.append(randomBig());
 
-        numbers.print();
+        radixSort(numbers, base);
 
         option = 0;
     }
