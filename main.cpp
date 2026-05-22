@@ -27,11 +27,11 @@ static int readPositiveInt(const string& prompt, int min=1) {
     }
 }
 
-static int randomBig() {
-    return (std::rand() << 15) | std::rand();
+static unsigned int randomBig() {
+    return (static_cast<unsigned int>(std::rand()) << 15) | static_cast<unsigned int>(std::rand());
 }
 
-static void radixSort(const LinkedList<int>& list, int base) {
+static void radixSort(LinkedList<int>& list, int base) {
     LinkedList<int>* buckets = new LinkedList<int>[base];
 
     buckets->print();
