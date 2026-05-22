@@ -4,8 +4,11 @@
 // ############################################################
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 #include <sstream>
+#include "LinkedList.h"
 
 using std::cout;
 using std::string;
@@ -24,11 +27,24 @@ static int readPositiveInt(const string& prompt, int min=1) {
     }
 }
 
+static int randomBig() {
+    return (std::rand() << 15) | std::rand();
+}
+
 int main() {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
     int option = -1;
     while (option != 0) {
         cout << "\tRadix Sort\n\n";
         int size = readPositiveInt("Enter the size of the list to sort: ");
+        int base = readPositiveInt("Enter the numeric base to use: ", 2);
+
+        LinkedList<int> numbers;
+        for (int i = 0; i < size; i++)
+            numbers.append(randomBig());
+
+        numbers.print();
 
         option = 0;
     }
