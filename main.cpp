@@ -31,10 +31,30 @@ static unsigned int randomBig() {
     return (static_cast<unsigned int>(std::rand()) << 15) | static_cast<unsigned int>(std::rand());
 }
 
+static int getMaxNum(LinkedList<int>& list) {
+    list.goToStart();
+    int max = 0;
+    while (!list.atEnd()) {
+        int num = list.getElement();
+        if (num > max) max = num;
+        list.next();
+    }
+    return max;
+}
+
 static void radixSort(LinkedList<int>& list, int base) {
     LinkedList<int>* buckets = new LinkedList<int>[base];
+    cout << getMaxNum(list);
 
-    buckets->print();
+    /*cout << '\n';
+    for (int i = 0; i < base; i++) {
+        cout << i;
+        buckets[i].print();
+    }*/
+}
+
+static int countDigits(int base) {
+
 }
 
 int main() {
@@ -50,6 +70,7 @@ int main() {
         for (int i = 0; i < size; i++)
             numbers.append(randomBig());
 
+        numbers.print();
         radixSort(numbers, base);
 
         option = 0;
