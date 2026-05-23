@@ -7,6 +7,7 @@
 #include <random>
 #include <string>
 #include <sstream>
+#include <chrono>
 #include "LinkedList.h"
 
 using std::cout;
@@ -108,9 +109,15 @@ int main() {
         cout << "\nUnsorted List:\n";
         printList(numbers);
 
-        cout << "\nSorted List:\n";
+        auto start = std::chrono::steady_clock::now();
         radixSort(numbers, base);
+        auto end = std::chrono::steady_clock::now();
+
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+
+        cout << "\nSorted List:\n";
         printList(numbers);
+        cout << "\nSorting time: " << elapsed.count() << " ms\n";
 
         option = readOption("\nWould you like to sort another list?\n1. Yes\n2. No and exit\nOption: ", 2);
     }
