@@ -4,8 +4,7 @@
 // ############################################################
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 #include <string>
 #include <sstream>
 #include "LinkedList.h"
@@ -25,10 +24,6 @@ static int readPositiveInt(const string& prompt, int min=1) {
             return value;
         cout << "Please enter an integer greater than or equal to " << min << ". Try again.\n";
     }
-}
-
-static unsigned int randomBig() {
-    return (static_cast<unsigned int>(std::rand()) << 15) | static_cast<unsigned int>(std::rand());
 }
 
 static int getMaxNum(LinkedList<int>& list) {
@@ -57,7 +52,8 @@ static void radixSort(LinkedList<int>& list, int base) {
 }
 
 int main() {
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<int> dist(0, 1000000000);
 
     int option = -1;
     while (option != 0) {
@@ -67,7 +63,7 @@ int main() {
 
         LinkedList<int> numbers;
         for (int i = 0; i < size; i++)
-            numbers.append(randomBig());
+            numbers.append(dist(gen));
 
         cout << "\nUnsorted List:\n";
         numbers.print();
