@@ -13,17 +13,21 @@ using std::cout;
 using std::string;
 
 static int readPositiveInt(const string& prompt, int min=1) {
-    while (true) {
+    bool isValid = false;
+    int value{};
+    while (!isValid) {
         cout << prompt;
         string line;
         std::getline(std::cin, line);
-
         std::istringstream iss(line);
-        int value{};
-        if ((iss >> value) && (iss >> std::ws).eof() && value >= min)
-            return value;
-        cout << "Please enter an integer greater than or equal to " << min << ". Try again.\n";
+        if (!(iss >> value) || !(iss >> std::ws).eof())
+            cout << "Not a valid integer or out of range. Try again.\n";
+        else if (value < min)
+            cout << "Please enter an integer greater than or equal to " << min << ". Try again.\n";
+        else
+            isValid = true;
     }
+    return value;
 }
 
 static int readOption(const string& prompt, int max) {
