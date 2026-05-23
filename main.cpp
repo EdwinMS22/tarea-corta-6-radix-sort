@@ -7,7 +7,6 @@
 #include <random>
 #include <string>
 #include <sstream>
-#include <cmath>
 #include "LinkedList.h"
 
 using std::cout;
@@ -51,21 +50,24 @@ static int countDigits(LinkedList<int>& list, int base) {
 static void radixSort(LinkedList<int>& list, int base) {
     LinkedList<int>* buckets = new LinkedList<int>[base];
     int passes = countDigits(list, base);
-    int exp = 0;
+    long long divisor = 1;
 
     while (passes != 0) {
         for (list.goToStart(); !list.atEnd(); list.next()) {
             int num = list.getElement();
-            int index = (num / static_cast<int>(std::pow(base, exp))) % base;
+            int index = (num / divisor) % base;
             buckets[index].append(num);
         }
+        list.clear();
+        for (int i = 0; i < base; i++) {
+            for (buckets[i].goToStart(); !buckets[i].atEnd(); buckets[i].next())
+                list.append(buckets[i].getElement());
+            buckets[i].clear();
+        }
+        divisor *= base;
         passes--;
-        break;
     }
-    for (int i = 0; i < base; i++) {
-        cout << i;
-        buckets[i].print();
-    }
+    delete[] buckets;
 }
 
 int main() {
@@ -84,13 +86,10 @@ int main() {
 
         cout << "\nUnsorted List:\n";
         numbers.print();
-        
-        LinkedList<int> sample;
-        sample.append(345);
-        sample.append(712);
-        sample.append(581);
+
         cout << "\nSorted List:\n";
-        radixSort(sample, base);
+        radixSort(numbers, base);
+        numbers.print();
 
         option = 0;
     }
