@@ -42,19 +42,18 @@ static int getMaxNum(LinkedList<int>& list) {
     return max;
 }
 
-static void radixSort(LinkedList<int>& list, int base) {
-    LinkedList<int>* buckets = new LinkedList<int>[base];
-    cout << getMaxNum(list);
-
-    /*cout << '\n';
-    for (int i = 0; i < base; i++) {
-        cout << i;
-        buckets[i].print();
-    }*/
+static int countDigits(LinkedList<int>& list) {
+    int maxNum = getMaxNum(list);
+    int count = 1;
+    while (maxNum >= 10) {
+        maxNum /= 10;
+        count++;
+    }
+    return count;
 }
 
-static int countDigits(int base) {
-
+static void radixSort(LinkedList<int>& list, int base) {
+    LinkedList<int>* buckets = new LinkedList<int>[base];
 }
 
 int main() {
@@ -70,7 +69,10 @@ int main() {
         for (int i = 0; i < size; i++)
             numbers.append(randomBig());
 
+        cout << "\nUnsorted List:\n";
         numbers.print();
+        
+        cout << "\nSorted List:\n";
         radixSort(numbers, base);
 
         option = 0;
