@@ -37,11 +37,11 @@ static int getMaxNum(LinkedList<int>& list) {
     return max;
 }
 
-static int countDigits(LinkedList<int>& list) {
+static int countDigits(LinkedList<int>& list, int base) {
     int maxNum = getMaxNum(list);
     int count = 1;
-    while (maxNum >= 10) {
-        maxNum /= 10;
+    while (maxNum >= base) {
+        maxNum /= base;
         count++;
     }
     return count;
@@ -49,6 +49,7 @@ static int countDigits(LinkedList<int>& list) {
 
 static void radixSort(LinkedList<int>& list, int base) {
     LinkedList<int>* buckets = new LinkedList<int>[base];
+
 }
 
 int main() {
