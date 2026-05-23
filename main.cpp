@@ -35,6 +35,13 @@ static int readOption(const string& prompt, int max) {
     }
 }
 
+static void printList(LinkedList<int>& list, int limit = 100) {
+    if (list.getSize() <= limit)
+        list.print();
+    else
+        cout << "(List too large to display: " << list.getSize() << " elements)\n";
+}
+
 static int getMaxNum(LinkedList<int>& list) {
     list.goToStart();
     int max = 0;
@@ -95,11 +102,11 @@ int main() {
             numbers.append(dist(gen));
 
         cout << "\nUnsorted List:\n";
-        numbers.print();
+        printList(numbers);
 
         cout << "\nSorted List:\n";
         radixSort(numbers, base);
-        numbers.print();
+        printList(numbers);
 
         option = readOption("\nWould you like to sort another list?\n1. Yes\n2. No and exit\nOption: ", 2);
     }
