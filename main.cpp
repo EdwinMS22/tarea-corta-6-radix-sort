@@ -26,6 +26,15 @@ static int readPositiveInt(const string& prompt, int min=1) {
     }
 }
 
+static int readOption(const string& prompt, int max) {
+    while (true) {
+        int option = readPositiveInt(prompt);
+        if (option <= max)
+            return option;
+        cout << "Please select an option from the menu.\n";
+    }
+}
+
 static int getMaxNum(LinkedList<int>& list) {
     list.goToStart();
     int max = 0;
@@ -74,9 +83,10 @@ int main() {
     std::mt19937 gen(std::random_device{}());
     std::uniform_int_distribution<int> dist(0, 1000000000);
 
-    int option = -1;
-    while (option != 0) {
-        cout << "\tRadix Sort\n\n";
+    cout << "\tRadix Sort\n";
+    int option = 1;
+    while (option != 2) {
+        cout << '\n';
         int size = readPositiveInt("Enter the size of the list to sort: ");
         int base = readPositiveInt("Enter the numeric base to use: ", 2);
 
@@ -91,7 +101,7 @@ int main() {
         radixSort(numbers, base);
         numbers.print();
 
-        option = 0;
+        option = readOption("\nWould you like to sort another list?\n1. Yes\n2. No and exit\nOption: ", 2);
     }
 
     return 0;
